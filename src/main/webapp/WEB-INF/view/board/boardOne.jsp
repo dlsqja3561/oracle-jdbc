@@ -6,14 +6,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1></h1>
 	<table border="1">
 		<tr>
 			<th>title</th>
-			<td>${board.title}</td>
+			<td>${board.boardTitle}</td>
 		</tr>
 		<tr>
 			<th>content</th>
-			<td>${board.content}</td>
+			<td>${board.boardContent}</td>
 		</tr>
 		<tr>
 			<th>createdate</th>
@@ -24,7 +25,7 @@
 			<td>${board.updatedate}</td>
 		</tr>
 	</table>
-	<a href="${pageContext.request.contextPath}/board/modifyBoard">수정</a>
-	<a href="${pageContext.request.contextPath}/board/removeBoard">삭제</a>
+	<a href="${pageContext.request.contextPath}/board/modifyBoard?boardNo=${boardNo}">수정</a>
+	<a href="${pageContext.request.contextPath}/board/removeBoard?boardNo=${boardNo}">삭제</a>
 </body>
 </html>

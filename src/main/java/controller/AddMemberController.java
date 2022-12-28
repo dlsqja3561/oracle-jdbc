@@ -7,9 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class AddMemberController
- */
+
 @WebServlet("/member/addMember")
 public class AddMemberController extends HttpServlet {
 	// 회원가입 폼

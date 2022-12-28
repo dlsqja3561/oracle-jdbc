@@ -41,12 +41,14 @@
 			<th>boardNo</th>
 			<th>boardTitle</th>
 			<th>createdate</th>
+			<th>updatedate</th>
 		</tr>
 		<c:forEach var="b" items="${boardList}">
 			<tr>
 				<td>${b.boardNo}</td>
 				<td><a href="${pageContext.request.contextPath}/board/boardOne?boardNo=${b.boardNo}">${b.boardTitle}</a></td>
 				<td>${b.createdate}</td>
+				<td>${b.updatedate}</td>
 			</tr>
 		</c:forEach>
 	</table>

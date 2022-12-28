@@ -70,7 +70,34 @@ public class BoardService {
 		return board;
 	}
 	
-	// insert
+	// ModifyBoardController
+	public int getModifyBoard(Board board) {
+		int row = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			boardDao = new BoardDao();
+			row = boardDao.modifyBoard(conn, board);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	
+	// AddBoardController
 	public int getInsertBoard(Board board) {
 		int row = 0;
 		Connection conn = null;
@@ -78,6 +105,33 @@ public class BoardService {
 			conn = DBUtil.getConnection();
 			boardDao = new BoardDao();
 			row = boardDao.insertBoard(conn, board);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	
+	// RemoveBoardController
+	public int getRemoveBoard(int boardNo) {
+		int row = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			boardDao = new BoardDao();
+			row = boardDao.removeBoard(conn, boardNo);
 			conn.commit();
 		} catch (Exception e) {
 			try {

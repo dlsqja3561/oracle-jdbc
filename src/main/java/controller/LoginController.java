@@ -21,6 +21,7 @@ public class LoginController extends HttpServlet {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginMember") != null) {
 			response.sendRedirect(request.getContextPath()+"/home");
+			return;
 		}
 		
 		//login.jsp
@@ -31,13 +32,13 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
 		// 로그인 되어있으면 /home
-		if(loginMember != null) {
+		if(session.getAttribute("loginMember") != null) {
 			response.sendRedirect(request.getContextPath()+"/home");
+			return;
 		}
 		
-		// loginForm에서 받아온 입력값
+		// login.jsp에서 받아온 입력값
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
 		System.out.println("memberId =" + memberId);
