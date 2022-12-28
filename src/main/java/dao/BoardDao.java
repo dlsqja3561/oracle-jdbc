@@ -34,7 +34,7 @@ public class BoardDao {
 	// BoardOne
 	public Board selectBoardListOne(Connection conn, int boardNo) throws Exception {
 		Board board = null;
-		String sql = "SELECT board_title boardTitle, board_content boardContent, createdate, updatedate"
+		String sql = "SELECT board_title boardTitle, board_content boardContent, member_id memberId, createdate, updatedate"
 				+ "		FROM board WHERE board_no = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, boardNo);
@@ -43,6 +43,7 @@ public class BoardDao {
 			board = new Board();
 			board.setBoardTitle(rs.getString("boardTitle"));
 			board.setBoardContent(rs.getString("boardContent"));
+			board.setMemberId(rs.getString("memberId"));
 			board.setCreatedate(rs.getString("createdate"));
 			board.setUpdatedate(rs.getString("updatedate"));
 		}

@@ -28,7 +28,7 @@ public class ModifyBoardController extends HttpServlet {
 		System.out.println(boardNo  + "boardNo ,ModifyBoardController");
 		
 		Board board = new Board();
-		boardService = new BoardService();
+		this.boardService = new BoardService();
 		board = boardService.getBoardListOne(boardNo);
 		
 		request.setAttribute("board", board);
@@ -38,6 +38,9 @@ public class ModifyBoardController extends HttpServlet {
 
 	// 글 수정 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 한글처리 인코딩
+		request.setCharacterEncoding("utf-8");
+		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
@@ -50,7 +53,7 @@ public class ModifyBoardController extends HttpServlet {
 		board.setBoardContent(content);
 		board.setBoardNo(boardNo);
 		
-		boardService = new BoardService();
+		this.boardService = new BoardService();
 		int row = boardService.getModifyBoard(board);
 		
 		if(row == 0) {

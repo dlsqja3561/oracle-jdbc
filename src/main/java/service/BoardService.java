@@ -1,13 +1,13 @@
 package service;
 
 import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.BoardDao;
 import util.DBUtil;
 import vo.Board;
-import vo.Member;
 
 public class BoardService {
 	private BoardDao boardDao;

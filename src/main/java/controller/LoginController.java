@@ -30,6 +30,8 @@ public class LoginController extends HttpServlet {
 
 	// 로그인 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 한글처리 인코딩
+		request.setCharacterEncoding("utf-8");
 		
 		HttpSession session = request.getSession();
 		// 로그인 되어있으면 /home

@@ -13,7 +13,7 @@ import service.BoardService;
 
 @WebServlet("/board/removeBoard")
 public class RemoveBoardController extends HttpServlet {
-	BoardService boardService = null;
+	private BoardService boardService = null;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int row = 0;
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
