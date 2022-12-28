@@ -43,6 +43,7 @@ public class BoardService {
 		return list;	
 	}
 	
+	// BoardOneController
 	public Board getBoardListOne(int boardNo) {
 		Board board = null;
 		Connection conn = null;

@@ -30,6 +30,7 @@ public class BoardDao {
 		return list;
 	}
 	
+	// BoardOneController
 	public Board selectBoardListOne(Connection conn, int boardNo) throws Exception {
 		Board board = null;
 		String sql = "SELECT board_title boardTitle, board_content boardContent, createdate, updatedate"

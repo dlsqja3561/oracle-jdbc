@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>insertBoardForm</h1>
-	<form method="post" id="form" action="${pageContext.request.contextPath}/InsertBoardActionController">
+	<form method="post" id="form" action="${pageContext.request.contextPath}/board/addBoard">
 		<table border="1">
 			<tr>
 				<th>TITLE</th>

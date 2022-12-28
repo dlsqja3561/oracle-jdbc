@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/InsertBoardFormController")
-public class InsertBoardFormController extends HttpServlet {
-	
+@WebServlet("/member/removeMember")
+public class RemoveMemberController extends HttpServlet {
+	// 회원 탈퇴 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// insertBoardForm.jsp
-		request.getRequestDispatcher("/WEB-INF/view/insertBoardForm.jsp").forward(request, response);
+		//removeMember.jsp
+	}
+
+	// 회원 탈퇴 액션
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// redirect  ->  logout
 	}
 
 }

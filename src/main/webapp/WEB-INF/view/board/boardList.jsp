@@ -16,7 +16,7 @@
 </head>
 <body>
 	<h1>BOARD LIST</h1>
-	<form id="pageForm" method="get" action="${pageContext.request.contextPath}/BoardListController">
+	<form id="pageForm" method="get" action="${pageContext.request.contextPath}/board/boardList">
 		<select name="rowPerPage" id="rowPerPage">
 			<c:if test="${rowPerPage == 10}">
 				<option value="10" selected="selected">10</option>
@@ -35,7 +35,7 @@
 			</c:if>
 		</select>
 	</form>
-	<a href="${pageContext.request.contextPath}/InsertBoardFormController">추가</a>
+	<a href="${pageContext.request.contextPath}/board/addBoard">추가</a>
 	<table border="1">
 		<tr>
 			<th>boardNo</th>
@@ -45,14 +45,14 @@
 		<c:forEach var="b" items="${boardList}">
 			<tr>
 				<td>${b.boardNo}</td>
-				<td><a href="${pageContext.request.contextPath}/BoardListOneController?boardNo=${b.boardNo}">${b.boardTitle}</a></td>
+				<td><a href="${pageContext.request.contextPath}/board/boardOne?boardNo=${b.boardNo}">${b.boardTitle}</a></td>
 				<td>${b.createdate}</td>
 			</tr>
 		</c:forEach>
 	</table>
 	<div>
-		<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-		<a href="${pageContext.request.contextPath}/BoardListController?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+		<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+		<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
 	</div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +11,18 @@ import service.BoardService;
 import vo.Board;
 
 
-@WebServlet("/InsertBoardActionController")
-public class InsertBoardActionController extends HttpServlet {
+@WebServlet("/board/addBoard")
+public class AddBoardController extends HttpServlet {
 	private BoardService boardService;
+	
+	// 글쓰기 폼
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// addBoardForm.jsp
+		request.getRequestDispatcher("/WEB-INF/view/board/addBoardForm.jsp").forward(request, response);
+	}
+
+	// 글쓰기 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String boardTitle = request.getParameter("boardTitle");
 		String boardContent = request.getParameter("boardContent");
 		System.out.println("boardTitle"+boardTitle);
@@ -32,10 +38,10 @@ public class InsertBoardActionController extends HttpServlet {
 		int row = boardService.getInsertBoard(board);
 		
 		if(row == 0) {
-			System.out.println("입력실패");
+			System.out.println("글쓰기 실패, AddBoardController");
 		}
-		
-		response.sendRedirect(request.getContextPath()+"/BoardListController");
+		System.out.println("글쓰기 성공, AddBoardController");
+		response.sendRedirect(request.getContextPath()+"/board/boardList");
 	}
 
 }

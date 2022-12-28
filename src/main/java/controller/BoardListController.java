@@ -13,7 +13,7 @@ import service.BoardService;
 import vo.Board;
 
 
-@WebServlet("/BoardListController")
+@WebServlet("/board/boardList")
 public class BoardListController extends HttpServlet {
 	private BoardService boardService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +33,6 @@ public class BoardListController extends HttpServlet {
 		request.setAttribute("currentPage", currentPage); // view에서 필요
 		request.setAttribute("rowPerPage", rowPerPage); // view에서 필요
 		
-		request.getRequestDispatcher("/WEB-INF/view/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/board/boardList.jsp").forward(request, response);
 	}
 }
