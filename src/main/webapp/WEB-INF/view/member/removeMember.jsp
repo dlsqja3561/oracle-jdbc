@@ -3,18 +3,63 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="../resorces/bootstrap.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<title>removeMember</title>
 </head>
 <body>
-	<h1>아이디 삭제</h1>
-	<form method="post" action="${pageContext.request.contextPath}/member/removeMember">
-		<table border="1">
-			<tr>
-				<th>비밀번호입력</th>
-				<td><input type="password" name="memberPw"></td>
-			</tr>
-		</table>
-		<button type="submit">삭제</button>
-	</form>
+<main class="d-flex w-100">
+	<div class="container d-flex flex-column">
+		<div class="row pt-5">
+			<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+				<div class="d-table-cell align-middle">
+					<div class="text-center mt-2">
+						<h1 class="h2">removeMember</h1>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<div class="m-sm-5 text-center">
+
+								<form method="post" id="form" action="${pageContext.request.contextPath}/member/removeMember">
+									<table class="table">
+										<tr>
+											<th>비밀번호입력</th>
+											<td>
+												<input type="password" name="memberPw" id="pw" class="form-control">
+												<span id="msg" style="color:#FF0000;"></span>
+											</td>
+											
+										</tr>
+									</table>
+									<button type="button" id="btn" class="btn btn-secondary">삭제</button>
+								</form>
+	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<script>
+	// pw 입력 포커스
+	$('#pw').focus();
+	// 입력확인
+	$('#pw').blur(function() {
+		if($('#pw').val().length == 0) {
+			$('#msg').text('이름을 입력해주세요');
+			$('#pw').focus();
+		} else {
+			$('#msg').text('');
+		}
+	});
+	// 버튼 클릭
+	$('#btn').click(function() {
+		$('form').submit();
+	});
+</script>
 </body>
 </html>

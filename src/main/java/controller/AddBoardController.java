@@ -28,7 +28,7 @@ public class AddBoardController extends HttpServlet {
 		}
 		
 		// addBoardForm.jsp
-		request.getRequestDispatcher("/WEB-INF/view/board/addBoardForm.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/board/addBoard.jsp").forward(request, response);
 	}
 
 	// 글쓰기 액션
