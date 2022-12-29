@@ -4,16 +4,50 @@ import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import vo.Board;
 import vo.Member;
 
 public class MemberDao {
+
+	// adminMemberList
+	public ArrayList<Member> selectMemberListByPage(Connection conn, int beginRow, int endRow) throws Exception {
+		ArrayList<Member> list = new ArrayList<Member>();
+		String sql = "select t2.rnum rnum, t2.name name, t2.memberLevel memberLevel, t2.updatedate updatedate, t2.createdate createdate"
+				+ " from (select rownum rnum, t.member_name name, t.member_level memberLevel, t.updatedate updatedate, t.createdate createdate"
+				+ " 	from (select member_name, member_level, updatedate, createdate"
+				+ " 		from member order by member_name asc) t) t2"
+				+ " where rnum between ? and ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		/*
+			page	beginRow	endRow
+			1		1			10
+			2		11			20
+			3		21			30
+		*/
+		stmt.setInt(1, beginRow);
+		stmt.setInt(2, endRow);
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			Member m = new Member();
+			m.setRowNum(rs.getInt("rnum"));
+			m.setMemberName(rs.getString("name"));
+			m.setMemberLevel(rs.getString("memberLevel"));
+			m.setUpdatedate(rs.getString("updatedate"));
+			m.setCreatedate(rs.getString("createdate"));
+			list.add(m);
+		}
+		return list;
+	}
+	
 	// 로그인 메서드
 	public Member selectMemberByIdAndPw(Connection conn, Member paramMember) throws Exception {
 		Member resultMember = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String spl = "SELECT member_id memberId, member_name memberName FROM member WHERE member_id = ? AND member_pw = ?";
+		String spl = "SELECT member_id memberId, member_name memberName, member_level memberLevel FROM member WHERE member_id = ? AND member_pw = ?";
 		
 		stmt = conn.prepareStatement(spl);
 		stmt.setString(1, paramMember.getMemberId());
@@ -24,6 +58,7 @@ public class MemberDao {
 			resultMember = new Member();
 			resultMember.setMemberId(rs.getString("memberId"));
 			resultMember.setMemberName(rs.getString("memberName"));
+			resultMember.setMemberLevel(rs.getString("memberLevel"));
 		}
 		
 		return resultMember;

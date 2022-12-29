@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +24,19 @@
 							<div class="m-sm-5 text-center">
 							
 								<div class="h4">
-									<span><strong>${loginMember.memberName}</strong>님 반갑습니다.</span>
+									<span><strong class="text-info">${loginMember.memberName}</strong>님 반갑습니다.</span>
 								</div>
 								<div>
 									<a class="btn btn-secondary" href="${pageContext.request.contextPath}/member/memberOne">내정보</a>
 									<a class="btn btn-secondary" href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 								</div>
+								<br>
 								<div>
 									<a class="btn btn-secondary" href="${pageContext.request.contextPath}/board/boardList">게시판리스트</a>
+									<!-- memberLevel 1일때만 멤버리스트 링크 노출 -->
+									<c:if test="${loginMember.memberLevel == 1}">
+										<a class="btn btn-secondary" href="${pageContext.request.contextPath}/admin/memberList">멤버리스트</a>
+									</c:if>
 								</div>
 								
 							</div>
