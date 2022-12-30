@@ -20,10 +20,14 @@ public class AdminMemberListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 로그인 안되어있으면 /loginController
 		HttpSession session = request.getSession();
+		if(session.getAttribute("loginMember") == null) { // 일반멤버이면 /loginController
+			response.sendRedirect(request.getContextPath()+"/member/login");
+			return;
+		}
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		String memberLevel = loginMember.getMemberLevel();
-		if(loginMember == null || memberLevel.equals("일반")) { // 일반멤버이면 /loginController
-			response.sendRedirect(request.getContextPath()+"/member/login");
+		if(memberLevel.equals("일반")) {
+			response.sendRedirect(request.getContextPath()+"/member/home");
 			return;
 		}
 		

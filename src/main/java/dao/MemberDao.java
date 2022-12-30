@@ -14,9 +14,9 @@ public class MemberDao {
 	// admin - MemberList
 	public ArrayList<Member> selectMemberListByPage(Connection conn, int beginRow, int endRow) throws Exception {
 		ArrayList<Member> list = new ArrayList<Member>();
-		String sql = "select t2.rnum rnum, t2.memberId memberId t2.memberName memberName, t2.memberLevel memberLevel, t2.updatedate updatedate, t2.createdate createdate"
-				+ " from (select rownum rnum, t.member_id memberId t.member_name memberName, t.member_level memberLevel, t.updatedate updatedate, t.createdate createdate"
-				+ " 	from (select member_id member_name, member_level, updatedate, createdate"
+		String sql = "select t2.rnum rnum, t2.memberId memberId, t2.memberName memberName, t2.memberLevel memberLevel, t2.updatedate updatedate, t2.createdate createdate"
+				+ " from (select rownum rnum, t.member_id memberId, t.member_name memberName, t.member_level memberLevel, t.updatedate updatedate, t.createdate createdate"
+				+ " 	from (select member_id, member_name, member_level, updatedate, createdate"
 				+ " 		from member order by member_name asc) t) t2"
 				+ " where rnum between ? and ?";
 		

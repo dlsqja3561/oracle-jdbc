@@ -34,7 +34,7 @@
 								<div>
 									<a class="btn btn-secondary" href="${pageContext.request.contextPath}/board/boardList">게시판리스트</a>
 									<!-- memberLevel 1일때만 멤버리스트 링크 노출 -->
-									<c:if test="${loginMember.memberLevel == 1}">
+									<c:if test="${loginMember.memberLevel eq '관리자'}">
 										<a class="btn btn-secondary" href="${pageContext.request.contextPath}/admin/memberList">멤버리스트</a>
 									</c:if>
 								</div>
