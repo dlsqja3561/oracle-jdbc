@@ -59,6 +59,8 @@
 										<th>memberLevel</th>
 										<th>updatedate</th>
 										<th>createdate</th>
+										<th>등급변경</th>
+										<th>강제탈퇴</th>
 									</tr>
 									<c:forEach var="m" items="${memberList}">
 										<tr>
@@ -67,6 +69,12 @@
 											<td>${m.memberLevel}</td>
 											<td>${m.updatedate}</td>
 											<td>${m.createdate}</td>
+											<td>
+												<a href="${pageContext.request.contextPath}/admin/modifyMemberLevel?memberId=${m.memberId}">변경</a>
+											</td>
+											<td>
+												<a href="${pageContext.request.contextPath}/admin/removeMember?memberId=${m.memberId}">강퇴</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</table>

@@ -11,12 +11,12 @@ import vo.Member;
 
 public class MemberDao {
 
-	// adminMemberList
+	// admin - MemberList
 	public ArrayList<Member> selectMemberListByPage(Connection conn, int beginRow, int endRow) throws Exception {
 		ArrayList<Member> list = new ArrayList<Member>();
-		String sql = "select t2.rnum rnum, t2.name name, t2.memberLevel memberLevel, t2.updatedate updatedate, t2.createdate createdate"
-				+ " from (select rownum rnum, t.member_name name, t.member_level memberLevel, t.updatedate updatedate, t.createdate createdate"
-				+ " 	from (select member_name, member_level, updatedate, createdate"
+		String sql = "select t2.rnum rnum, t2.memberId memberId t2.memberName memberName, t2.memberLevel memberLevel, t2.updatedate updatedate, t2.createdate createdate"
+				+ " from (select rownum rnum, t.member_id memberId t.member_name memberName, t.member_level memberLevel, t.updatedate updatedate, t.createdate createdate"
+				+ " 	from (select member_id member_name, member_level, updatedate, createdate"
 				+ " 		from member order by member_name asc) t) t2"
 				+ " where rnum between ? and ?";
 		
@@ -33,13 +33,37 @@ public class MemberDao {
 		while(rs.next()) {
 			Member m = new Member();
 			m.setRowNum(rs.getInt("rnum"));
-			m.setMemberName(rs.getString("name"));
+			m.setMemberId(rs.getString("memberId"));
+			m.setMemberName(rs.getString("memberName"));
 			m.setMemberLevel(rs.getString("memberLevel"));
 			m.setUpdatedate(rs.getString("updatedate"));
 			m.setCreatedate(rs.getString("createdate"));
 			list.add(m);
 		}
 		return list;
+	}
+	
+	// admin - modifyMemberLevel
+	public int modifyMemberLevel(Connection conn, Member member) throws Exception {
+		int row = 0;
+		String sql = "UPDATE member SET member_level = ?, updatedate = sysdate WHERE member_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, member.getMemberLevel());
+		stmt.setString(2, member.getMemberId());
+		row = stmt.executeUpdate();
+		
+		return row;
+	}
+	
+	// admin - removeMember
+	public int adminRemoveMember(Connection conn, String memberId) throws Exception {
+		int row = 0;
+		String sql = "DELETE FROM member WHERE member_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, memberId);
+		row = stmt.executeUpdate();
+		
+		return row;
 	}
 	
 	// 로그인 메서드

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.MemberService;
 import vo.Member;
@@ -17,7 +18,15 @@ import vo.Member;
 public class AdminMemberListController extends HttpServlet {
 	private MemberService memberService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1) controller
+		// 로그인 안되어있으면 /loginController
+		HttpSession session = request.getSession();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		String memberLevel = loginMember.getMemberLevel();
+		if(loginMember == null || memberLevel.equals("일반")) { // 일반멤버이면 /loginController
+			response.sendRedirect(request.getContextPath()+"/member/login");
+			return;
+		}
+		
 		int currentPage = 1;
 		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));

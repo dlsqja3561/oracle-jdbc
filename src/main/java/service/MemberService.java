@@ -11,7 +11,7 @@ import vo.Member;
 public class MemberService {
 	private MemberDao memberDao;
 	
-	// AdminMemberListController
+	// Admin - MemberListController
 	public ArrayList<Member> getMemberListByPage(int currentPage, int rowPerPage) {
 		ArrayList<Member> list = null;
 		Connection conn = null;
@@ -41,6 +41,60 @@ public class MemberService {
 		
 	}
 	
+	// admin - modifyMemberController
+	public int getModifyMemberLevel(Member member) {
+		int row = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			memberDao = new MemberDao();
+			row = memberDao.modifyMemberLevel(conn, member);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+		
+	}
+	
+	// admin - removeMemberController
+	public int getAdminRemoveMember(String memberId) {
+		int row = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			memberDao = new MemberDao();
+			row = memberDao.adminRemoveMember(conn, memberId);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
 	
 	// LoginController
 	public Member login(Member paramMember) {
