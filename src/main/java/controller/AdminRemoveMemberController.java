@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import service.MemberService;
 
 
-@WebServlet("/AdminRemoveMemberController")
+@WebServlet("/admin/removeMember")
 public class AdminRemoveMemberController extends HttpServlet {
 	private MemberService memberService = null;
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int row = 0;
 		String memberId = request.getParameter("memberId");
 		System.out.println(memberId+", memberId ,AdminRemoveMemberController");

@@ -43,9 +43,17 @@ public class AdminMemberListController extends HttpServlet {
 		
 		this.memberService = new MemberService();
 		ArrayList<Member> list = memberService.getMemberListByPage(currentPage, rowPerPage);
+		// lastPage
+		int count = memberService.getMemberLastPage();
+		int lastPage = count / rowPerPage;
+		if(count % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		
 		request.setAttribute("memberList", list);
 		request.setAttribute("currentPage", currentPage); 
 		request.setAttribute("rowPerPage", rowPerPage);
+		request.setAttribute("lastPage", lastPage);
 		
 		request.getRequestDispatcher("/WEB-INF/view/admin/memberList.jsp").forward(request, response);
 		

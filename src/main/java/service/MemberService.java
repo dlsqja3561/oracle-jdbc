@@ -41,6 +41,33 @@ public class MemberService {
 		
 	}
 	
+	// lastPage
+	public int getMemberLastPage() {
+		int count = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			memberDao = new MemberDao();
+			count = memberDao.selectMemberCount(conn);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return count;
+	}
+	
 	// admin - modifyMemberController
 	public int getModifyMemberLevel(Member member) {
 		int row = 0;

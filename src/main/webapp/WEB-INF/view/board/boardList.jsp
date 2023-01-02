@@ -71,11 +71,22 @@
 										</tr>
 									</c:forEach>
 								</table>
+								<!-- 페이징 -->
 								<div>
-									<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-									<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+									<c:if test="${currentPage == 1}">
+										<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=1">이전</a>
+									</c:if>
+									<c:if test="${currentPage > 1}">
+										<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+									</c:if>
+									<span>${currentPage}/${lastPage}</span>
+									<c:if test="${currentPage == lastPage}">
+										<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${lastPage}">이전</a>
+									</c:if>
+									<c:if test="${currentPage < lastPage}">
+										<a href="${pageContext.request.contextPath}/board/boardList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+									</c:if>
 								</div>
-	
 							</div>
 						</div>
 					</div>

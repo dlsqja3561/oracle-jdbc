@@ -33,8 +33,8 @@
 										<tr>
 											<th>memberLevel</th>
 											<td>
-												<input type="radio" name="memberLevel" value="일반" class="form-control" checked="checked">일반
-												<input type="radio" name="memberLevel" value="관리자" class="form-control">관리자
+												<input type="radio" name="memberLevel" value="일반" class="form-check-input" checked="checked">일반
+												<input type="radio" name="memberLevel" value="관리자" class="form-check-input">관리자
 											</td>
 										</tr>
 									</table>

@@ -8,7 +8,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="../resorces/bootstrap.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<title>Insert title here</title>
+<title>memberList</title>
 <!-- script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
@@ -78,11 +78,22 @@
 										</tr>
 									</c:forEach>
 								</table>
+								<!-- 페이징 -->
 								<div>
-									<a href="${pageContext.request.contextPath}/admin/memberList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
-									<a href="${pageContext.request.contextPath}/admin/memberList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+									<c:if test="${currentPage == 1}">
+										<a href="${pageContext.request.contextPath}/admin/memberList?rowPerPage=${rowPerPage}&currentPage=1">이전</a>
+									</c:if>
+									<c:if test="${currentPage > 1}">
+										<a href="${pageContext.request.contextPath}/admin/memberList?rowPerPage=${rowPerPage}&currentPage=${currentPage-1}">이전</a>
+									</c:if>
+									<span>${currentPage}/${lastPage}</span>
+									<c:if test="${currentPage == lastPage}">
+										<a href="${pageContext.request.contextPath}/admin/memberList?rowPerPage=${rowPerPage}&currentPage=${lastPage}">이전</a>
+									</c:if>
+									<c:if test="${currentPage < lastPage}">
+										<a href="${pageContext.request.contextPath}/admin/memberList?rowPerPage=${rowPerPage}&currentPage=${currentPage+1}">다음</a>
+									</c:if>
 								</div>
-	
 							</div>
 						</div>
 					</div>

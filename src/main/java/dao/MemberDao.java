@@ -43,6 +43,19 @@ public class MemberDao {
 		return list;
 	}
 	
+	// lastPage
+	public int selectMemberCount(Connection conn) throws Exception {
+		int count = 0;
+		String sql = "select COUNT(*) cnt from member";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			count = rs.getInt("cnt");
+		}
+		
+		return count;
+	}
+	
 	// admin - modifyMemberLevel
 	public int modifyMemberLevel(Connection conn, Member member) throws Exception {
 		int row = 0;

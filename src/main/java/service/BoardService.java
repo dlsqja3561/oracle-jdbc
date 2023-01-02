@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.BoardDao;
+import dao.MemberDao;
 import util.DBUtil;
 import vo.Board;
 
@@ -41,6 +42,33 @@ public class BoardService {
 			}
 		}
 		return list;	
+	}
+	
+	// lastPage
+	public int getMemberLastPage() {
+		int count = 0;
+		Connection conn = null;
+		try {
+			conn = DBUtil.getConnection();
+			boardDao = new BoardDao();
+			count = boardDao.selectMemberCount(conn);
+			conn.commit();
+		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return count;
 	}
 	
 	// BoardOneController

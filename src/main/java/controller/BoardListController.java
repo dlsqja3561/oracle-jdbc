@@ -37,9 +37,17 @@ public class BoardListController extends HttpServlet {
 		
 		this.boardService = new BoardService();
 		ArrayList<Board> list = boardService.getBoardListByPage(currentPage, rowPerPage);
+		// lastPage
+		int count = boardService.getMemberLastPage();
+		int lastPage = count / rowPerPage;
+		if(count % rowPerPage != 0) {
+			lastPage += 1;
+		}
+		
 		request.setAttribute("boardList", list);
 		request.setAttribute("currentPage", currentPage); // view에서 필요
 		request.setAttribute("rowPerPage", rowPerPage); // view에서 필요
+		request.setAttribute("lastPage", lastPage);
 		
 		request.getRequestDispatcher("/WEB-INF/view/board/boardList.jsp").forward(request, response);
 	}

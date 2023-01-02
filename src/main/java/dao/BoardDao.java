@@ -31,6 +31,19 @@ public class BoardDao {
 		return list;
 	}
 	
+	// lastPage
+	public int selectMemberCount(Connection conn) throws Exception {
+		int count = 0;
+		String sql = "select COUNT(*) cnt from board";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			count = rs.getInt("cnt");
+		}
+		
+		return count;
+	}
+	
 	// BoardOne
 	public Board selectBoardListOne(Connection conn, int boardNo) throws Exception {
 		Board board = null;
